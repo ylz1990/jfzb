@@ -1,0 +1,96 @@
+{% extends 'index/base.html' %}
+
+    {% block main %}
+
+<!--banner部分开始-->
+  <div class="banner_box1">
+        <ul class="banner_pic1">
+            <li><img src="../../static/images/banner1.jpg" /></li>
+            <li><img src="../../static/images/xsj_ban1.jpg" /></li>
+            <li><img src="../../static/images/xsj_ban2.jpg" /></li>
+            <li><img src="../../static/images/xsj_ban3.jpg" /></li>
+            <li><img src="../../static/images/index_banner3.jpg" /></li>
+        </ul>
+        <a class="prev" href="javascript:void(0)"></a>
+        <a class="next" href="javascript:void(0)"></a>
+        <div class="num"><ul></ul></div>
+  </div>
+	<script>
+    /*鼠标移过，左右按钮显示*/
+    $(".banner_box1").hover(function(){
+        $(this).find(".prev,.next").fadeTo("show",0.1);
+    },function(){
+        $(this).find(".prev,.next").hide();
+    })
+    /*鼠标移过某个按钮 高亮显示*/
+    $(".prev,.next").hover(function(){
+        $(this).fadeTo("show",0.7);
+    },function(){
+        $(this).fadeTo("show",0.1);
+    })
+    $(".banner_box1").slide({ titCell:".num ul" , mainCell:".banner_pic1" , effect:"fold", autoPlay:true, delayTime:700 , autoPage:true });
+    </script>
+    <!-- 代码 结束 -->
+  <!--banner部分结束-->
+
+<!--内容开始-->
+<div class="content_box1">
+  <div class="content_box2"> 
+    <div class="menu_box">
+       <p class="menu_box_title">大咖论道 <span>Expert Interpretation </span></p>
+       <ul class="menu_box1">
+          <li><a href="{% url 'cases:cases' %}">机构精评</a></li>
+          <li><a href="{% url 'cases:cases_2' %}">机构观点</a></li>
+          <li><a href="{% url 'cases:cases_3' %}">名家策略</a></li>
+          <li><a href="{% url 'cases:cases_4' %}">名家精评</a></li>
+       </ul>
+    </div>
+    <div class="content_boxL">
+       <div class="content_boxL_nav">
+         <p class="content_boxL_nav_title">福州君枫珠宝</p>
+         <div class="content_boxL_nav_R"><a href="{% url 'index:jfzb' %}">首页 ></a> <a href="{% url 'cases:cases' %}">大咖论道  ></a><a href=""> 机构观点</a></div>
+       </div>
+       <div class="content_boxL_text">
+         <ul class="cgal_list">
+             {% for new in news %}
+             <li><img class="cgal_pic" src="{{ new.image_url.url }}" alt="{{ new.title }}"/>
+                <div class="cgan_xqy">
+                    <p style="text-align: center"><a href="{% url 'cases:case_info' new.id %}" target="_blank"><b>{{ new.title }}</b></a></p>
+                    <p>{{ new.content|safe|truncatewords:2 }}</p>
+                </div>
+             </li>
+             {% endfor %}
+         </ul>       
+       </div>
+       <div class="fenye_box">
+          <a href="?page=1">首页</a>
+                {#      上一页   has_previous   #}
+            {% if page_of_news.has_previous %}
+                <a href="?page={{ page_of_news.previous_page_number }}" aria-label="Previous">上一页</a>
+            {% else %}
+                <a aria-hidden="true">上一页</a>
+            {% endif %}
+                {#      上一页          #}
+             {#      全部页码          #}
+            {% for page_num in page_range %}
+                {% if page_num == page_of_news.number %}
+                    <a  class="on">{{ page_num }}</a>
+                {% else %}
+                    <a href="?page={{ page_num }}">{{ page_num }}</a>
+                {% endif %}
+            {% endfor %}
+            {#      全部页码          #}
+            {#      下一页          #}
+            {% if page_of_news.has_next %}
+                <a href="?page={{ page_of_news.next_page_number }}" aria-label="Next">下一页</a>
+            {% else %}
+                <a aria-hidden="true">下一页</a>
+            {% endif %}
+            {#      下一页          #}
+                 {#   尾页就是获取就大的页码数   #}
+           <a href="?page={{ paginator.num_pages }}">尾页</a>
+       </div>
+    </div>
+        <div class="clear"></div>
+      {% endblock %}
+

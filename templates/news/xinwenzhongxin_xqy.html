@@ -1,0 +1,74 @@
+{% extends 'index/base.html' %}
+
+    {% block main %}
+<!--banner部分开始-->
+  <div class="banner_box1">
+        <ul class="banner_pic1">
+            <li><img src="../../static/images/banner1.jpg" /></li>
+            <li><img src="../../static/images/xsj_ban1.jpg" /></li>
+            <li><img src="../../static/images/xsj_ban2.jpg" /></li>
+            <li><img src="../../static/images/xsj_ban3.jpg" /></li>
+            <li><img src="../../static/images/index_banner3.jpg" /></li>
+    
+        </ul>
+        <a class="prev" href="javascript:void(0)"></a>
+        <a class="next" href="javascript:void(0)"></a>
+        <div class="num"><ul></ul></div>
+  </div>
+	<script>
+    /*鼠标移过，左右按钮显示*/
+    $(".banner_box1").hover(function(){
+        $(this).find(".prev,.next").fadeTo("show",0.1);
+    },function(){
+        $(this).find(".prev,.next").hide();
+    })
+    /*鼠标移过某个按钮 高亮显示*/
+    $(".prev,.next").hover(function(){
+        $(this).fadeTo("show",0.7);
+    },function(){
+        $(this).fadeTo("show",0.1);
+    })
+    $(".banner_box1").slide({ titCell:".num ul" , mainCell:".banner_pic1" , effect:"fold", autoPlay:true, delayTime:700 , autoPage:true });
+    </script>
+    <!-- 代码 结束 -->
+  <!--banner部分结束-->
+
+<!--内容开始-->
+<div class="content_box1">
+  <div class="content_box2"> 
+    <div class="menu_box">
+       <p class="menu_box_title">财经要闻<span>news</span></p>
+       <ul class="menu_box1">
+          <li><a href="{% url 'news:news' %}">君枫财经</a></li>
+          <li><a href="{% url 'news:gold_news' %}">黄金头条</a></li>
+          <li><a href="{% url 'news:news_info' %}">最新资讯</a></li>
+       </ul>
+    </div>
+    <div class="content_boxL">
+       <div class="content_boxL_nav">
+         <p class="content_boxL_nav_title">福州君枫珠宝</p>
+         <div class="content_boxL_nav_R"><a href="{% url 'index:jfzb' %}">首页 ></a> <a href="{% url 'news:news' %}">财经要闻 ></a><span>{{ new.new_type }}</span></div>
+       </div>
+       <div class="content_boxL_text">
+          <p class="xqy_news_title"><b>{{ new.title }}</b><br /><span>发布时间：{{ new.created_time|date:'Y-m-d' }} &nbsp;&nbsp;来源：{{ new.author }}&nbsp;&nbsp;点击：{{ new.read_num }}</span></p>
+          <div class="xqy_news_title1">
+            {{ new.content|safe }}
+          </div>
+           <br />
+           <div>
+               {% if previoud_new %}
+                   <span>上一篇：<a href="{% url 'news:new_detail' previoud_new.pk %}">{{ previoud_new.title }}</a></span><br />
+               {% else %}
+                   暂无最新
+               {% endif %}
+               <br />
+                {% if next_new %}
+                    <span>下一篇：<a href="{% url 'news:new_detail' next_new.pk %}">{{ next_new.title }}</a></span>
+                {% else %}
+                    已经到末尾了
+                {% endif %}
+           </div>
+       </div>
+    </div>
+   <div class="clear"></div>
+      {% endblock %}

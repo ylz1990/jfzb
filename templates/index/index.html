@@ -1,0 +1,110 @@
+{% extends 'index/base.html' %}
+
+    {% block main %}
+<!--banner部分开始-->
+  <div class="banner_box">
+        <ul class="banner_pic">
+            <li><img src="../../static/images/banner1.jpg" /></li>
+            <li><img src="../../static/images/xsj_ban1.jpg" /></li>
+            <li><img src="../../static/images/xsj_ban2.jpg" /></li>
+            <li><img src="../../static/images/xsj_ban3.jpg" /></li>
+            <li><img src="../../static/images/index_banner3.jpg" /></li>
+        </ul>
+        <a target="_blank" class="prev" href="javascript:void(0)"></a>
+        <a target="_blank" class="next" href="javascript:void(0)"></a>
+        <div class="num"><ul></ul></div>
+  </div>
+	<script>
+    /*鼠标移过，左右按钮显示*/
+    $(".banner_box").hover(function(){
+        $(this).find(".prev,.next").fadeTo("show",0.1);
+    },function(){
+        $(this).find(".prev,.next").hide();
+    })
+    /*鼠标移过某个按钮 高亮显示*/
+    $(".prev,.next").hover(function(){
+        $(this).fadeTo("show",0.7);
+    },function(){
+        $(this).fadeTo("show",0.1);
+    })
+    $(".banner_box").slide({ titCell:".num ul" , mainCell:".banner_pic" , effect:"fold", autoPlay:true, delayTime:700 , autoPage:true });
+    </script>
+    <!-- 代码 结束 -->
+  <!--banner部分结束-->
+
+<!--内容开始-->
+<div class="content_box">
+   <ul class="content_box_top">
+      <li>
+        <a target="_blank" href="{% url 'member:member' %}"><img src="../../static/images/icon1.png"/></a>
+        <h3 class="obj_title">专注财富增值</h3>
+        <p>始终以“为客户创造财富”这一服务理念作为己任</p>
+      </li>
+      <li>
+        <a target="_blank" href="{% url 'member:member_1' %}"><img src="../../static/images/icon2.png"/></a>
+        <h3 class="obj_title">行情实时解析</h3>
+        <p>公司提供专业的行情软件，客户可随时了解行情，掌握行情机会</p>
+      </li>
+      <li>
+        <a target="_blank" href="{% url 'member:member_2' %}"><img src="../../static/images/icon3.png"/></a>
+        <h3 class="obj_title">VIP尊享</h3>
+        <p>VIP行情、策略、操作提醒服务，私享专家为您定制的投资方案</p>
+      </li>
+      <li>
+        <a target="_blank" href="{% url 'member:member_3' %}"><img src="../../static/images/icon4.png"/></a>
+        <h3 class="obj_title">策略分享</h3>
+        <p>公司专家团队全面分析，提供客户最专业的策略分享</p>
+      </li> 
+   </ul>
+   <div class="content_box_bot">
+       <ul class="content_box_bot_l">
+          <li class="info_news">
+            <div class="info_news_but"><p class="on">君枫财经</p><p>黄金头条</p><p>最新资讯</p></div>
+            <ul class="info_news_text info_news_text1">
+                {% for new in news %}
+              <li><a target="_blank" href="{% url 'news:new_detail' new.id %}"><img src="../../static/images/info_icon1.png"/><p>{{ new.title|slice:"30" }}<span class="date">{{ new.created_time|date:"Y-m-d" }}</span></p></a></li>
+                {% endfor %}
+            </ul>
+            <ul class="info_news_text info_news_text2">
+                {% for new in gold_news %}
+              <li><a target="_blank" href="{% url 'news:new_detail' new.id %}"><img src="../../static/images/info_icon1.png"/><p>{{ new.title|slice:"30" }}<span class="date">{{ new.created_time|date:"Y-m-d" }}</span></p></a></li>
+                {% endfor %}
+            </ul>
+          <ul class="info_news_text info_news_text2">
+                {% for new in news_info %}
+              <li><a target="_blank" href="{% url 'news:new_detail' new.id %}"><img src="../../static/images/info_icon1.png"/><p>{{ new.title|slice:"30" }}<span class="date">{{ new.created_time|date:"Y-m-d" }}</span></p></a></li>
+                {% endfor %}
+            </ul>
+          <script>
+            $(".info_news_but p").each(function(n){
+				$(this).click(function(){
+				$(this).addClass("on").siblings("p").removeClass("on");
+				$(".info_news_text").hide(400).eq(n).show(500);
+		    });
+           });
+          
+          </script>
+          </li>
+          <li class="search_obj">
+            <p class="search_obj_title">分类搜索<span>Classification search</span></p>
+            <div class="search_obj1">
+               <a target="_blank" href="{% url 'gold:college' %}">黄金 T+D</a>  <a target="_blank" href="{% url 'gold:college6' %}">投资技巧</a>  <a target="_blank" href="{% url 'gold:college7' %}">黄金投资</a>
+               <a target="_blank" href="{% url 'cases:cases' %}">机构精评</a>  <a target="_blank" href="{% url 'cases:cases_3' %}">名家策略</a>  <a target="_blank" href="{% url 'news:news' %}">更多>></a>
+            </div>
+          </li>
+       </ul>
+       
+      <ul class="content_box_bot_r">
+          <li class="jianjie_box">
+            <p class="jianjie_title">关于福州君枫珠宝<span>COMPANY</span></p>
+            <div class="jianjie_box1">
+              <img src="../../static/images/jj_pic.jpg"/>
+              <a target="_blank" href="{% url 'company:company' %}">上海君枫珠宝首饰有限公司福州分公司于2019年01月22日成立。公司经营范围包括：珠宝首饰、金银省品、工艺礼品（失牙及其省品重消）、化妆品、单体出品、鞋帽箱客、眼镜、智能设备、钟加、计或钱软硬情的销售，本济信息咨询。（依法须本批水的价目，本史关部门批水下云待玉新本真府联）.<span>[详情]</span></a></div>
+          </li>
+          <li class="zichan_box">
+            <P>黄金动态<span>Gold Dynamics</span></P>
+            <a target="_blank" href="{% url 'gold:college7' %}">黄金自古以来就是货币。形成世界经济体系以后，黄金是国际货币。1976年，国际货币基金组织在牙买加首都金斯敦召开的会议上决定，废除黄金官价，用特别提款权逐步代替黄金作为国际货币制度的主要储备资产，宣布黄金非货币化。但是从那以后，黄金仍然被世界上绝大多数国家作为国际储备资产、价值的最终储藏手段。在通货膨胀严重、政治经济危机时期，黄金的价值更会增加。<span>[详情]</span></a>
+          </li>
+       </ul>
+   </div>
+      {% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'index/base.html' %}
+
+    {% block main %}
+<!--banner部分开始-->
+  <div class="banner_box1">
+        <ul class="banner_pic1">
+            <li><img src="../../static/images/banner1.jpg" /></li>
+            <li><img src="../../static/images/xsj_ban1.jpg" /></li>
+            <li><img src="../../static/images/xsj_ban2.jpg" /></li>
+            <li><img src="../../static/images/xsj_ban3.jpg" /></li>
+            <li><img src="../../static/images/index_banner3.jpg" /></li>
+    
+        </ul>
+        <a class="prev" href="javascript:void(0)"></a>
+        <a class="next" href="javascript:void(0)"></a>
+        <div class="num"><ul></ul></div>
+  </div>
+	<script>
+    /*鼠标移过，左右按钮显示*/
+    $(".banner_box1").hover(function(){
+        $(this).find(".prev,.next").fadeTo("show",0.1);
+    },function(){
+        $(this).find(".prev,.next").hide();
+    })
+    /*鼠标移过某个按钮 高亮显示*/
+    $(".prev,.next").hover(function(){
+        $(this).fadeTo("show",0.7);
+    },function(){
+        $(this).fadeTo("show",0.1);
+    })
+    $(".banner_box1").slide({ titCell:".num ul" , mainCell:".banner_pic1" , effect:"fold", autoPlay:true, delayTime:700 , autoPage:true });
+    </script>
+    <!-- 代码 结束 -->
+  <!--banner部分结束-->
+
+<!--内容开始-->
+<div class="content_box1">
+  <div class="content_box2"> 
+    <div class="menu_box">
+       <p class="menu_box_title">留言板<span>Message</span></p>
+       <ul class="menu_box1">
+          <li><a href="">留言板</a></li>
+       </ul>
+    </div>
+    <div class="content_boxL">
+       <div class="content_boxL_nav">
+         <p class="content_boxL_nav_title">留言板</p>
+         <div class="content_boxL_nav_R"><a href="">首页 ></a> <a href="">留言板</a></div>                          
+       </div>
+       <ul class="lyb_box">
+         <li class="lyb_box1">
+          <p>公司名称：</p> <p>联系人姓名：</p> <p>公司地址：</p> <p>传真：</p> <p>邮箱：</p> <p>留言内容：</p>
+         </li>
+          <form class="lyb_box2">
+           <li><input type="text" value=""/></li>
+           <li><input type="text" value=""/></li>
+           <li><input type="text" value=""/></li>
+           <li><input type="text" value=""/></li>
+           <li><input type="text" value=""/></li>
+           <li><textarea></textarea></li>
+           <li><input type="submit" value="提交" class="submit"/></li>
+          </form>
+       </ul>
+    </div>
+   <div class="clear"></div>
+             {% endblock %}

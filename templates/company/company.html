@@ -1,0 +1,57 @@
+{% extends 'index/base.html' %}
+
+    {% block main %}
+<!--banner部分开始-->
+  <div class="banner_box1">
+        <ul class="banner_pic1">
+            <li><img src="../../static/images/banner1.jpg" /></li>
+            <li><img src="../../static/images/xsj_ban1.jpg" /></li>
+            <li><img src="../../static/images/xsj_ban2.jpg" /></li>
+            <li><img src="../../static/images/xsj_ban3.jpg" /></li>
+            <li><img src="../../static/images/index_banner3.jpg" /></li>
+        </ul>
+        <a class="prev" href="javascript:void(0)"></a>
+        <a class="next" href="javascript:void(0)"></a>
+        <div class="num"><ul></ul></div>
+  </div>
+	<script>
+    /*鼠标移过，左右按钮显示*/
+    $(".banner_box1").hover(function(){
+        $(this).find(".prev,.next").fadeTo("show",0.1);
+    },function(){
+        $(this).find(".prev,.next").hide();
+    })
+    /*鼠标移过某个按钮 高亮显示*/
+    $(".prev,.next").hover(function(){
+        $(this).fadeTo("show",0.7);
+    },function(){
+        $(this).fadeTo("show",0.1);
+    })
+    $(".banner_box1").slide({ titCell:".num ul" , mainCell:".banner_pic1" , effect:"fold", autoPlay:true, delayTime:700 , autoPage:true });
+    </script>
+    <!-- 代码 结束 -->
+  <!--banner部分结束-->
+
+<!--内容开始-->
+<div class="content_box1">
+  <div class="content_box2"> 
+    <div class="menu_box">
+       <p class="menu_box_title">君枫珠宝<span>About us</span></p>
+       <ul class="menu_box1">
+          <li><a href="{% url 'company:company' %}">君枫简介</a></li>
+          <li><a href="{% url 'company:company_2' %}">君枫文化</a></li>
+          <li><a href="{% url 'company:company_3' %}">君枫业务</a></li>
+       </ul>
+    </div>
+    <div class="content_boxL">
+       <div class="content_boxL_nav">
+         <p class="content_boxL_nav_title"><b>福州君枫珠宝</b></p>
+         <div class="content_boxL_nav_R"><a href="">首页 ></a> <a href="">君枫珠宝 ></a><a href=""> 君枫简介</a></div>
+       </div>
+       <div class="content_boxL_text">
+         <img class="content_boxL_pic" src="../../static/images/gyhq_pic1.png"/>
+               {{ new.content|safe }}
+       </div>
+    </div>
+   <div class="clear"></div>
+      {% endblock %}
